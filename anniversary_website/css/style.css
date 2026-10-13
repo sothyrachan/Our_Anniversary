@@ -1,0 +1,79 @@
+/* Shared styles for every page */
+:root {
+  --blush: #ffe3ea;
+  --petal: #ffc2d1;
+  --rose: #f28fa6;
+  --rose-deep: #d95f7d;
+  --cream: #fff8f0;
+  --cocoa: #6b3a47;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Fredoka", "Trebuchet MS", sans-serif;
+  color: var(--cocoa);
+  background: radial-gradient(circle at 20% 15%, #fff3f6 0%, var(--blush) 45%, var(--petal) 100%);
+  overflow-x: hidden;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font: 500 1.1rem "Fredoka", sans-serif;
+  color: #fff;
+  background: var(--rose-deep);
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 2.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 6px 0 #b04561;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #b04561; }
+.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #b04561; }
+.btn:focus-visible { outline: 3px solid var(--cocoa); outline-offset: 3px; }
+
+/* Music toggle (bottom-right corner) */
+.music-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--rose-deep);
+  background: var(--cream);
+  box-shadow: 0 3px 10px rgba(107, 58, 71, 0.25);
+  cursor: pointer;
+  z-index: 50;
+}
+.music-toggle.off { opacity: 0.55; text-decoration: line-through; }
+
+/* Floating background hearts */
+.floaties { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.floaties span {
+  position: absolute;
+  bottom: -40px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  background: url("../assets/images/heart.svg") center / contain no-repeat;
+  opacity: 0;
+  animation: rise var(--d) linear var(--delay) infinite;
+}
+@keyframes rise {
+  0%   { transform: translateY(0) rotate(-8deg); opacity: 0; }
+  10%  { opacity: 0.55; }
+  90%  { opacity: 0.55; }
+  100% { transform: translateY(-110vh) rotate(12deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
