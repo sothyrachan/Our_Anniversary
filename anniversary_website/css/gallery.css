@@ -1,0 +1,135 @@
+/* Gallery page */
+body { min-height: 100%; padding-bottom: 7rem; }
+
+.page-head {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2.5rem 1rem 1rem;
+}
+.page-head h1 {
+  font-family: "Caveat", cursive;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  color: var(--rose-deep);
+}
+.page-head p { margin-top: 0.2rem; font-size: 0.95rem; opacity: 0.75; }
+
+/* Area the photos float in (height is set by gallery.js) */
+.gallery {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+/* Outer element: position + endless drifting */
+.polaroid {
+  position: absolute;
+  animation: drift var(--dur) ease-in-out var(--delay) infinite alternate;
+}
+.polaroid:hover, .polaroid:focus-within { z-index: 10; }
+
+@keyframes drift {
+  from { transform: translate(0, 0) rotate(var(--rot)); }
+  to   { transform: translate(var(--dx), var(--dy)) rotate(calc(var(--rot) * -0.6)); }
+}
+
+/* Inner element: the polaroid frame itself */
+.frame {
+  display: block;
+  width: 100%;
+  padding: 8px 8px 0;
+  border: none;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 8px 18px rgba(107, 58, 71, 0.22);
+  cursor: pointer;
+  text-align: center;
+  font: inherit;
+  color: var(--cocoa);
+  transition: transform 0.25s, box-shadow 0.25s;
+  animation: pop 0.7s cubic-bezier(.3, 1.4, .5, 1) backwards;
+  animation-delay: calc(var(--i) * 120ms);
+}
+.frame:hover { transform: scale(1.08); box-shadow: 0 14px 26px rgba(107, 58, 71, 0.3); }
+.frame:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 3px; }
+
+.frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.frame .caption {
+  display: block;
+  padding: 0.3rem 0 0.45rem;
+  font-family: "Caveat", cursive;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+/* One entrance moment when the page loads */
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.6) translateY(30px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Next button pinned to the bottom */
+.next-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem 1rem 1.6rem;
+  background: linear-gradient(to top, rgba(255, 227, 234, 0.95) 40%, rgba(255, 227, 234, 0));
+  pointer-events: none;
+}
+.next-bar .btn { pointer-events: auto; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(107, 58, 71, 0.72);
+  backdrop-filter: blur(4px);
+}
+.lightbox[hidden] { display: none; }
+.lightbox figure {
+  max-width: min(560px, 100%);
+  padding: 12px 12px 0;
+  background: #fff;
+  border-radius: 6px;
+  text-align: center;
+  animation: pop 0.35s ease backwards;
+}
+.lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 68vh;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+.lightbox figcaption {
+  padding: 0.5rem 0 0.7rem;
+  font-family: "Caveat", cursive;
+  font-size: 1.7rem;
+  color: var(--cocoa);
+}
+.lightbox-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  width: 44px; height: 44px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--rose-deep);
+  background: var(--cream);
+  cursor: pointer;
+}

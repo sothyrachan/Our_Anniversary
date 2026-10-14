@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Last Thing...</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/question.css">
+</head>
+<body>
+
+  <!-- Floating background hearts -->
+  <div class="floaties" aria-hidden="true">
+    <span style="--x:9%;  --s:18px; --d:14s; --delay:0s"></span>
+    <span style="--x:33%; --s:24px; --d:16s; --delay:5s"></span>
+    <span style="--x:58%; --s:14px; --d:12s; --delay:2s"></span>
+    <span style="--x:82%; --s:20px; --d:15s; --delay:7s"></span>
+  </div>
+
+  <main class="stage">
+    <img id="mascot" class="mascot" src="assets/images/mascot-sad.svg" alt="">
+
+    <!-- The question -->
+    <section id="ask" class="ask">
+      <h1>I know you do not love me!</h1>
+
+      <div class="choices">
+        <button id="yesBtn" class="btn btn-yes" type="button">Yes</button>
+
+        <!-- The slot keeps the layout steady when the No button runs away -->
+        <div id="noSlot" class="no-slot">
+          <button id="noBtn" class="btn btn-no" type="button">No</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✏️ Shown after she clicks Yes. Edit the words however you like. -->
+    <section id="result" class="result" hidden>
+      <h1>I knew it! ♥</h1>
+      <p>Happy anniversary, my love. Thank you for being mine, today and always.</p>
+      <a class="btn" href="index.html">Read it all again</a>
+    </section>
+  </main>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle music">♪</button>
+
+  <script src="js/music.js"></script>
+  <script src="js/question.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Letter For You</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/letter.css">
+</head>
+<body>
+
+  <!-- Floating background hearts -->
+  <div class="floaties" aria-hidden="true">
+    <span style="--x:6%;  --s:20px; --d:15s; --delay:0s"></span>
+    <span style="--x:28%; --s:14px; --d:12s; --delay:4s"></span>
+    <span style="--x:60%; --s:24px; --d:16s; --delay:2s"></span>
+    <span style="--x:84%; --s:16px; --d:11s; --delay:6s"></span>
+  </div>
+
+  <main class="stage">
+
+    <article class="paper" aria-label="A letter for you">
+      <img class="paper-seal" src="assets/images/heart.svg" alt="">
+
+      <!-- ✏️ WRITE YOUR LETTER HERE.
+           Each <p> is one paragraph. Keep the class names as they are. -->
+      <div class="letter-body" id="letterBody">
+        <p class="greeting">Dear my love,</p>
+
+        <p>Happy anniversary! I wanted to make something that feels as warm as you do, so I built you a tiny corner of the internet.</p>
+
+        <p>Thank you for every laugh, every late-night talk, and every quiet moment where we didn't need to say anything at all. You make ordinary days feel special.</p>
+
+        <p>I'm so proud of us, and I can't wait for everything we still get to do together.</p>
+
+        <p class="signature">Forever yours,<br>Your Name ♥</p>
+      </div>
+    </article>
+
+    <div class="actions">
+      <button id="skipBtn" class="skip" type="button">Show it all</button>
+      <a id="nextBtn" class="btn btn-next" href="question.html">Next</a>
+    </div>
+
+  </main>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle music">♪</button>
+
+  <script src="js/music.js"></script>
+  <script src="js/letter.js"></script>
+</body>
+</html>
