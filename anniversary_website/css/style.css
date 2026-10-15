@@ -77,3 +77,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
 }
+
+/* Page transitions (used by js/router.js) */
+body.page-leave > :not([data-persist]) { opacity: 0; transition: opacity 0.22s ease; }
+.page-enter { animation: page-in 0.45s ease backwards; }
+@keyframes page-in { from { opacity: 0; } }

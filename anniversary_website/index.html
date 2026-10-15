@@ -1,57 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>For You</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>For You</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/envelope.css">
-</head>
-<body>
-
-  <!-- Floating background hearts -->
-  <div class="floaties" aria-hidden="true">
-    <span style="--x:8%;  --s:22px; --d:14s; --delay:0s"></span>
-    <span style="--x:22%; --s:14px; --d:11s; --delay:3s"></span>
-    <span style="--x:37%; --s:26px; --d:16s; --delay:6s"></span>
-    <span style="--x:52%; --s:16px; --d:12s; --delay:1s"></span>
-    <span style="--x:66%; --s:24px; --d:15s; --delay:4s"></span>
-    <span style="--x:80%; --s:12px; --d:10s; --delay:7s"></span>
-    <span style="--x:92%; --s:20px; --d:13s; --delay:2s"></span>
-  </div>
-
-  <main class="stage">
-    <p class="hint" id="hint">Hey love, Kimsreng! <br>I made something for you handsome</p>
-
-    <!-- Envelope (pure CSS) -->
-    <div class="envelope" id="envelope" role="img" aria-label="A closed envelope">
-      <div class="env-back"></div>
-      <div class="env-card"><span>For my favorite person,<br>Happy 5th Anniversary, Love.<br>Click next to see our beautiful moments together 💗</span></div>
-      <div class="env-pocket env-left"></div>
-      <div class="env-pocket env-right"></div>
-      <div class="env-pocket env-bottom"></div>
-      <div class="env-flap"></div>
-      <img class="env-seal" src="assets/images/heart.svg" alt="">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/envelope.css" />
+    <link rel="router" href="js/router.js" />
+  </head>
+  <body>
+    <!-- Floating background hearts -->
+    <div class="floaties" aria-hidden="true">
+      <span style="--x: 8%; --s: 22px; --d: 14s; --delay: 0s"></span>
+      <span style="--x: 22%; --s: 14px; --d: 11s; --delay: 3s"></span>
+      <span style="--x: 37%; --s: 26px; --d: 16s; --delay: 6s"></span>
+      <span style="--x: 52%; --s: 16px; --d: 12s; --delay: 1s"></span>
+      <span style="--x: 66%; --s: 24px; --d: 15s; --delay: 4s"></span>
+      <span style="--x: 80%; --s: 12px; --d: 10s; --delay: 7s"></span>
+      <span style="--x: 92%; --s: 20px; --d: 13s; --delay: 2s"></span>
     </div>
 
-    <div class="actions">
-      <button id="openBtn" class="btn" type="button">Open it</button>
-      <a id="nextBtn" class="btn btn-next" href="gallery.html">Next</a>
-    </div>
-  </main>
+    <main class="stage">
+      <p class="hint" id="hint">
+        Hey love, Kimsreng! <br />I made something for you handsome
+      </p>
 
-  <!-- Background music (put your file at assets/audio/bg-music.mp3) -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
-  </audio>
-  <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle music">♪</button>
+      <!-- Envelope (pure CSS) -->
+      <div
+        class="envelope"
+        id="envelope"
+        role="img"
+        aria-label="A closed envelope"
+      >
+        <div class="env-back"></div>
+        <div class="env-card">
+          <span
+            >For my favorite person,<br />Happy 5th Anniversary, Love.<br />Click
+            next to see our beautiful moments together 💗</span
+          >
+        </div>
+        <div class="env-pocket env-left"></div>
+        <div class="env-pocket env-right"></div>
+        <div class="env-pocket env-bottom"></div>
+        <div class="env-flap"></div>
+        <img class="env-seal" src="assets/images/heart.svg" alt="" />
+      </div>
 
-  <script src="js/music.js"></script>
-  <script src="js/envelope.js"></script>
-</body>
+      <div class="actions">
+        <button id="openBtn" class="btn" type="button">Open it</button>
+        <a id="nextBtn" class="btn btn-next" href="gallery.html">Next</a>
+      </div>
+    </main>
+
+    <!-- Background music (put your file at assets/audio/bg-music.mp3) -->
+    <audio id="bgMusic" data-persist loop preload="auto"></audio>
+    <button id="musicToggle" data-persist class="music-toggle" ...>♪</button>
+
+    <script src="js/music.js" data-persist></script>
+    <script src="js/router.js" data-persist></script>
+    <script type="module" src="js/envelope.js"></script>
+  </body>
 </html>

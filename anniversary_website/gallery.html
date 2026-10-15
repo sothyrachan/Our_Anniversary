@@ -1,55 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Our Memories</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Memories</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/gallery.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
+    <link rel="router" href="js/router.js" />
+  </head>
+  <body>
+    <!-- Floating background hearts -->
+    <div class="floaties" aria-hidden="true">
+      <span style="--x: 10%; --s: 18px; --d: 14s; --delay: 0s"></span>
+      <span style="--x: 30%; --s: 24px; --d: 16s; --delay: 5s"></span>
+      <span style="--x: 55%; --s: 14px; --d: 12s; --delay: 2s"></span>
+      <span style="--x: 75%; --s: 22px; --d: 15s; --delay: 7s"></span>
+      <span style="--x: 90%; --s: 16px; --d: 11s; --delay: 3s"></span>
+    </div>
 
-  <!-- Floating background hearts -->
-  <div class="floaties" aria-hidden="true">
-    <span style="--x:10%; --s:18px; --d:14s; --delay:0s"></span>
-    <span style="--x:30%; --s:24px; --d:16s; --delay:5s"></span>
-    <span style="--x:55%; --s:14px; --d:12s; --delay:2s"></span>
-    <span style="--x:75%; --s:22px; --d:15s; --delay:7s"></span>
-    <span style="--x:90%; --s:16px; --d:11s; --delay:3s"></span>
-  </div>
+    <header class="page-head">
+      <h1>Our little memories</h1>
+      <p>Tap a photo to see it bigger</p>
+    </header>
 
-  <header class="page-head">
-    <h1>Our little memories</h1>
-    <p>Tap a photo to see it bigger</p>
-  </header>
+    <!-- Photos are created by js/gallery.js -->
+    <section class="gallery" id="gallery" aria-label="Photo gallery"></section>
 
-  <!-- Photos are created by js/gallery.js -->
-  <section class="gallery" id="gallery" aria-label="Photo gallery"></section>
+    <div class="next-bar">
+      <a class="btn" href="letter.html">Next</a>
+    </div>
 
-  <div class="next-bar">
-    <a class="btn" href="letter.html">Next</a>
-  </div>
+    <!-- Big view when a photo is tapped -->
+    <div class="lightbox" id="lightbox" hidden>
+      <figure>
+        <img id="lightboxImg" src="" alt="" />
+        <figcaption id="lightboxCaption"></figcaption>
+      </figure>
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close photo"
+      >
+        &times;
+      </button>
+    </div>
 
-  <!-- Big view when a photo is tapped -->
-  <div class="lightbox" id="lightbox" hidden>
-    <figure>
-      <img id="lightboxImg" src="" alt="">
-      <figcaption id="lightboxCaption"></figcaption>
-    </figure>
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo">&times;</button>
-  </div>
+    <audio id="bgMusic" data-persist loop preload="auto"></audio>
+    <button id="musicToggle" data-persist class="music-toggle" ...>♪</button>
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
-  </audio>
-  <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle music">♪</button>
-
-  <script src="js/music.js"></script>
-  <script src="js/gallery.js"></script>
-</body>
+    <script src="js/music.js" data-persist></script>
+    <script src="js/router.js" data-persist></script>
+    <script type="module" src="js/gallery.js"></script>
+  </body>
 </html>

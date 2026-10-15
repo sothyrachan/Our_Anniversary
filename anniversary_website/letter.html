@@ -1,60 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Letter For You</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Letter For You</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/letter.css">
-</head>
-<body>
-
-  <!-- Floating background hearts -->
-  <div class="floaties" aria-hidden="true">
-    <span style="--x:6%;  --s:20px; --d:15s; --delay:0s"></span>
-    <span style="--x:28%; --s:14px; --d:12s; --delay:4s"></span>
-    <span style="--x:60%; --s:24px; --d:16s; --delay:2s"></span>
-    <span style="--x:84%; --s:16px; --d:11s; --delay:6s"></span>
-  </div>
-
-  <main class="stage">
-
-    <article class="paper" aria-label="A letter for you">
-      <img class="paper-seal" src="assets/images/heart.svg" alt="">
-
-      <!-- ✏️ WRITE YOUR LETTER HERE.
-           Each <p> is one paragraph. Keep the class names as they are. -->
-      <div class="letter-body" id="letterBody">
-        <p class="greeting">Dear my love,</p>
-
-        <p>Happy anniversary! I wanted to make something that feels as warm as you do, so I built you a tiny corner of the internet.</p>
-
-        <p>Thank you for every laugh, every late-night talk, and every quiet moment where we didn't need to say anything at all. You make ordinary days feel special.</p>
-
-        <p>I'm so proud of us, and I can't wait for everything we still get to do together.</p>
-
-        <p class="signature">Forever yours,<br>Your Name ♥</p>
-      </div>
-    </article>
-
-    <div class="actions">
-      <button id="skipBtn" class="skip" type="button">Show it all</button>
-      <a id="nextBtn" class="btn btn-next" href="question.html">Next</a>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/letter.css" />
+  </head>
+  <body>
+    <!-- Floating background hearts -->
+    <div class="floaties" aria-hidden="true">
+      <span style="--x: 6%; --s: 20px; --d: 15s; --delay: 0s"></span>
+      <span style="--x: 28%; --s: 14px; --d: 12s; --delay: 4s"></span>
+      <span style="--x: 60%; --s: 24px; --d: 16s; --delay: 2s"></span>
+      <span style="--x: 84%; --s: 16px; --d: 11s; --delay: 6s"></span>
     </div>
 
-  </main>
+    <main class="stage">
+      <article class="paper" aria-label="A letter for you">
+        <img class="paper-seal" src="assets/images/heart.svg" alt="" />
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="assets/audio/bg-music.mp3" type="audio/mpeg">
-  </audio>
-  <button id="musicToggle" class="music-toggle" type="button" aria-label="Toggle music">♪</button>
+        <!-- ✏️ WRITE YOUR LETTER HERE.
+           Each <p> is one paragraph. Keep the class names as they are. -->
+        <div class="letter-body" id="letterBody">
+          <p class="greeting">Dear my love,</p>
 
-  <script src="js/music.js"></script>
-  <script src="js/letter.js"></script>
-</body>
+          <p>
+            Happy anniversary! I wanted to make something that feels as warm as
+            you do, so I built you a tiny corner of the internet.
+          </p>
+
+          <p>
+            Thank you for every laugh, every late-night talk, and every quiet
+            moment where we didn't need to say anything at all. You make
+            ordinary days feel special.
+          </p>
+
+          <p>
+            I'm so proud of us, and I can't wait for everything we still get to
+            do together.
+          </p>
+
+          <p class="signature">Forever yours,<br />Your Name ♥</p>
+        </div>
+      </article>
+
+      <div class="actions">
+        <button id="skipBtn" class="skip" type="button">Show it all</button>
+        <button id="nextBtn" class="btn btn-next" type="button">
+          Back to the start
+        </button>
+      </div>
+    </main>
+
+    <!-- Confirmation popup (opens when "Back to the start" is clicked) -->
+    <div
+      class="modal"
+      id="confirmModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirmTitle"
+      hidden
+    >
+      <div class="modal-card">
+        <button
+          class="modal-close"
+          id="closeBtn"
+          type="button"
+          aria-label="Cancel"
+        >
+          &times;
+        </button>
+        <img class="modal-gif" src="assets/images/couple/confirm.gif" alt="" />
+        <h2 id="confirmTitle">Go back to the start?</h2>
+        <p>
+          You'll leave the letter and return to the envelope. Ready to read it
+          all again?
+        </p>
+        <div class="modal-actions">
+          <a class="btn" id="confirmYes" href="index.html">Yes, take me back</a>
+          <button class="btn-ghost" id="stayBtn" type="button">
+            Stay here
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="bgMusic" data-persist preload="auto"></audio>
+    <button
+      id="musicToggle"
+      data-persist
+      class="music-toggle"
+      type="button"
+      aria-label="Toggle music"
+    >
+      ♪
+    </button>
+
+    <script src="js/music.js" data-persist></script>
+    <script src="js/router.js" data-persist></script>
+    <script type="module" src="js/letter.js"></script>
+  </body>
 </html>
