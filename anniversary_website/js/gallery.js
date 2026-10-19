@@ -3,14 +3,14 @@
 // ✏️ EDIT THIS LIST: add your own photos and captions.
 // Put image files in assets/images/couple/ (jpg, png, webp or svg all work).
 const photos = [
-  { src: "assets/images/couple/photo1.svg", caption: "Our first date" },
-  { src: "assets/images/couple/photo2.svg", caption: "That silly day" },
-  { src: "assets/images/couple/photo3.svg", caption: "Our favorite place" },
-  { src: "assets/images/couple/photo4.svg", caption: "Best trip ever" },
-  { src: "assets/images/couple/photo5.svg", caption: "Cozy nights" },
-  { src: "assets/images/couple/photo6.svg", caption: "You made me laugh" },
-  { src: "assets/images/couple/photo7.svg", caption: "Us being us" },
-  { src: "assets/images/couple/photo8.svg", caption: "Forever to go" },
+  { src: "assets/images/couple/couple_pics/picture1.JPG", caption: "Best trip ever" },
+  { src: "assets/images/couple/couple_pics/picture2.JPG", caption: "That exciting day" },
+  { src: "assets/images/couple/couple_pics/picture3.JPG", caption: "Our favorite place" },
+  { src: "assets/images/couple/couple_pics/picture4.JPG", caption: "Forever to go" },
+  { src: "assets/images/couple/couple_pics/picture5.JPG", caption: "My handsome man" },
+  { src: "assets/images/couple/couple_pics/picture6.JPG", caption: "Your pretty gf" },
+  { src: "assets/images/couple/couple_pics/picture7.JPG", caption: "Us being us" },
+  { src: "assets/images/couple/couple_pics/picture8.JPG", caption: "Crazy, Cozy night" },
 ];
 
 const gallery = document.getElementById("gallery");

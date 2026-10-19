@@ -15,8 +15,18 @@ html, body { height: 100%; }
 body {
   font-family: "Fredoka", "Trebuchet MS", sans-serif;
   color: var(--cocoa);
-  background: radial-gradient(circle at 20% 15%, #fff3f6 0%, var(--blush) 45%, var(--petal) 100%);
   overflow-x: hidden;
+}
+
+html { background: var(--petal); }
+
+/* The pink background lives on a fixed layer, so it never repeats or tears on long, scrolling pages */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 20% 15%, #fff3f6 0%, var(--blush) 45%, var(--petal) 100%);
 }
 
 /* Buttons */

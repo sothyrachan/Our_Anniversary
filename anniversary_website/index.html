@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffc2d1" />
     <title>For You</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +15,6 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/envelope.css" />
-    <link rel="router" href="js/router.js" />
   </head>
   <body>
     <!-- Floating background hearts -->
@@ -30,28 +30,47 @@
 
     <main class="stage">
       <p class="hint" id="hint">
-        Hey love, Kimsreng! <br />I made something for you handsome
+        <span class="hint-title">Hey love, Kimsreng!</span>
+        <span class="hint-sub">I made something for you handsome</span>
       </p>
 
-      <!-- Envelope (pure CSS) -->
-      <div
-        class="envelope"
-        id="envelope"
-        role="img"
-        aria-label="A closed envelope"
-      >
-        <div class="env-back"></div>
-        <div class="env-card">
-          <span
-            >For my favorite person,<br />Happy 5th Anniversary, Love.<br />Click
-            next to see our beautiful moments together 💗</span
-          >
+      <div class="envelope-wrap">
+        <!-- Envelope (pure CSS) -->
+        <div
+          class="envelope"
+          id="envelope"
+          role="group"
+          aria-label="A sealed envelope with a card inside"
+        >
+          <div class="env-back"></div>
+
+          <div class="env-card">
+            <div class="card-text">
+              <span class="card-to">To my most favorite person,</span>
+              <span class="card-main">Happy 5th Anniversary, pd sml.</span>
+              <span class="card-note">
+                Click next to see our beautiful moments together 💗
+              </span>
+            </div>
+          </div>
+
+          <div class="env-pocket env-left"></div>
+          <div class="env-pocket env-right"></div>
+          <div class="env-pocket env-bottom"></div>
+          <div class="env-lines"></div>
+          <div class="env-flap"></div>
+
+          <div class="env-seal">
+            <img src="assets/images/heart.svg" alt="" />
+          </div>
         </div>
-        <div class="env-pocket env-left"></div>
-        <div class="env-pocket env-right"></div>
-        <div class="env-pocket env-bottom"></div>
-        <div class="env-flap"></div>
-        <img class="env-seal" src="assets/images/heart.svg" alt="" />
+
+        <!-- Twinkles around the envelope -->
+        <i class="sparkle" aria-hidden="true" style="--x: -5%; --y: 8%; --s: 1.3rem; --delay: 0s">✦</i>
+        <i class="sparkle" aria-hidden="true" style="--x: 98%; --y: 2%; --s: 1rem; --delay: 0.9s">✦</i>
+        <i class="sparkle" aria-hidden="true" style="--x: 104%; --y: 62%; --s: 1.4rem; --delay: 1.7s">✦</i>
+        <i class="sparkle" aria-hidden="true" style="--x: -7%; --y: 70%; --s: 0.9rem; --delay: 1.2s">✦</i>
+        <i class="sparkle" aria-hidden="true" style="--x: 48%; --y: -14%; --s: 0.8rem; --delay: 0.4s">✦</i>
       </div>
 
       <div class="actions">
@@ -60,9 +79,15 @@
       </div>
     </main>
 
-    <!-- Background music (put your file at assets/audio/bg-music.mp3) -->
-    <audio id="bgMusic" data-persist loop preload="auto"></audio>
-    <button id="musicToggle" data-persist class="music-toggle" ...>♪</button>
+    <!-- Background music playlist (songs are listed in js/music.js) -->
+    <audio id="bgMusic" data-persist preload="auto"></audio>
+    <button
+      id="musicToggle"
+      data-persist
+      class="music-toggle"
+      type="button"
+      aria-label="Toggle music"
+    >♪</button>
 
     <script src="js/music.js" data-persist></script>
     <script src="js/router.js" data-persist></script>

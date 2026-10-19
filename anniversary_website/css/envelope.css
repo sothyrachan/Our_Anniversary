@@ -7,105 +7,262 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  padding: 6rem 1.5rem 3rem;
+  gap: 2.6rem;
+  padding: 4.5rem 1.5rem 3rem;
   text-align: center;
 }
 
+/* ---- Greeting ---- */
 .hint {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  animation: hint-in 0.9s ease 0.1s backwards;
+  transition: opacity 0.5s, transform 0.5s, visibility 0.5s;
+}
+.hint-title {
   font-family: "Caveat", cursive;
-  font-size: 2.2rem;
+  font-size: clamp(2.4rem, 9vw, 3.3rem);
+  line-height: 1;
   color: var(--rose-deep);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.75);
 }
+.hint-sub {
+  font-size: clamp(0.95rem, 3.6vw, 1.1rem);
+  color: var(--cocoa);
+  opacity: 0.8;
+}
+.hint-sub::before, .hint-sub::after { content: "♥"; margin: 0 0.5em; color: var(--rose); font-size: 0.8em; }
+@keyframes hint-in { from { opacity: 0; transform: translateY(-14px); } }
 
-.hint.sticky-top {
-  position: fixed;
-  top: 20px; /* Gives it a little breathing room from the absolute top edge */
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
+/* The greeting steps aside when the card rises into its space */
+.stage.is-open .hint { opacity: 0; transform: translateY(-10px); visibility: hidden; }
 
 /* ---- Envelope ---- */
-.envelope {
-  --paper:  #f9b4c4;
-  --paper-2: #f598ae;
-  --paper-3: #ee7f9a;
+.envelope-wrap {
   position: relative;
-  width: min(340px, 82vw);
+  width: min(380px, 86vw);
+}
+/* Soft glow behind the envelope */
+.envelope-wrap::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 150%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 62%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.envelope {
+  --paper:    #f9b4c4;
+  --paper-hi: #fcc9d6;
+  --paper-2:  #f598ae;
+  --paper-3:  #ee7f9a;
+  /* inside of the envelope: a deeper pink with a tiny heart pattern */
+  --liner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 28 28'%3E%3Cpath fill='%23ffffff' fill-opacity='.2' d='M14 20C14 20 7 15.5 7 11.5C7 9.3 8.7 8 10.5 8C12 8 13.3 8.8 14 10C14.7 8.8 16 8 17.5 8C19.3 8 21 9.3 21 11.5C21 15.5 14 20 14 20Z'/%3E%3C/svg%3E");
+
+  position: relative;
+  width: 100%;
   aspect-ratio: 3 / 2;
+  container-type: inline-size;       /* lets the text scale with the envelope (cqw units) */
   perspective: 900px;
   cursor: pointer;
-  filter: drop-shadow(0 14px 18px rgba(107, 58, 71, 0.25));
+  filter: drop-shadow(0 12px 14px rgba(107, 58, 71, 0.22));
+  animation: float 4.5s ease-in-out infinite;
+}
+/* Soft shadow on the "table" under the envelope */
+.envelope-wrap::after {
+  content: "";
+  position: absolute;
+  left: 10%; right: 10%; bottom: -22px;
+  height: 18px;
+  background: radial-gradient(ellipse at center, rgba(107, 58, 71, 0.28), rgba(107, 58, 71, 0) 70%);
+  filter: blur(3px);
+  pointer-events: none;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
 }
 
 .envelope > * { position: absolute; }
 
 .env-back {
   inset: 0;
-  background: var(--paper-3);
-  border-radius: 8px;
+  border-radius: 10px;
+  background: var(--liner), linear-gradient(180deg, #ea7694, #e0617f);
 }
 
-/* The little card that slides out */
+/* ---- The card inside ---- */
 .env-card {
-  left: 8%; right: 8%; top: 8%; height: 80%;
-  background: var(--cream);
-  border-radius: 6px;
-  display: grid;
-  place-items: start center;
-  padding-top: 1rem;
-  font-family: "Caveat", cursive;
-  font-size: 1.6rem;
-  color: var(--rose-deep);
+  left: 7%; right: 7%; top: 8%; height: 80%;
   z-index: 2;
-  transition: transform 0.9s cubic-bezier(.3, 1.2, .5, 1) 0.45s;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6.5cqw 7cqw 0;
+  background: #fffaf3;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(107, 58, 71, 0.18);
+  /* it grows taller as it slides out, so its bottom edge stays hidden inside the pocket */
+  transition: top 0.9s cubic-bezier(.3, 1.15, .5, 1) 0.45s,
+              height 0.9s cubic-bezier(.3, 1.15, .5, 1) 0.45s;
+}
+.env-card::before {                 /* dashed stitched border */
+  content: "";
+  position: absolute;
+  inset: 2.4cqw;
+  border: 1.5px dashed rgba(242, 143, 166, 0.75);
+  border-radius: 4px;
+  pointer-events: none;
 }
 
-/* Front pocket made of three triangles */
-.env-pocket { inset: 0; z-index: 3; border-radius: 8px; }
-.env-left   { background: var(--paper);   clip-path: polygon(0 0, 52% 52%, 0 100%); }
-.env-right  { background: var(--paper);   clip-path: polygon(100% 0, 48% 52%, 100% 100%); }
-.env-bottom { background: var(--paper-2); clip-path: polygon(0 100%, 50% 48%, 100% 100%); }
+.card-text {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  font-family: "Caveat", cursive;
+}
+.card-to   { font-size: 1.15rem; font-size: 5.2cqw; color: var(--cocoa); opacity: 0.85; }
+.card-main { font-size: 1.6rem;  font-size: 7.4cqw; line-height: 1.05; color: var(--rose-deep); text-wrap: balance; }
+.card-note { margin-top: 0.45em; font-size: 1.05rem; font-size: 4.9cqw; line-height: 1.2; color: var(--cocoa); text-wrap: balance; }
 
-/* Top flap */
+/* ---- Front pocket (three triangles) ---- */
+.env-pocket { inset: 0; z-index: 3; border-radius: 10px; }
+.env-left   { background: linear-gradient(100deg, var(--paper-hi), var(--paper));  clip-path: polygon(0 0, 52% 52%, 0 100%); }
+.env-right  { background: linear-gradient(260deg, var(--paper-hi), var(--paper)); clip-path: polygon(100% 0, 48% 52%, 100% 100%); }
+.env-bottom { background: linear-gradient(0deg, #f08aa3, var(--paper-2));          clip-path: polygon(0 100%, 50% 48%, 100% 100%); }
+
+/* Thin highlights along the fold lines */
+.env-lines {
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200' preserveAspectRatio='none'%3E%3Cpath d='M0 0L156 104M300 0L144 104M0 200L150 96M300 200L150 96' stroke='white' stroke-opacity='.5' stroke-width='1.3' fill='none' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* ---- Top flap ---- */
 .env-flap {
   left: 0; top: 0; width: 100%; height: 56%;
-  background: var(--paper-2);
+  background: linear-gradient(180deg, var(--paper-hi), var(--paper-2));
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
   z-index: 4;
-  transition: transform 0.6s ease, z-index 0s 0.3s;
+  transition: transform 0.6s ease, z-index 0s 0.3s, background 0s 0.3s;
 }
 
-/* Heart seal */
+/* ---- Wax seal ---- */
 .env-seal {
-  width: 15%;
+  width: 17cqw;
+  aspect-ratio: 1;
   left: 50%; top: 56%;
-  transform: translate(-50%, -60%);
   z-index: 5;
+  display: grid;
+  place-items: center;
+  border-radius: 52% 48% 50% 50% / 50% 52% 48% 50%;
+  background: radial-gradient(circle at 35% 30%, #f2759a, #d0426d 70%);
+  box-shadow: 0 2px 0 #a92f55, 0 6px 10px rgba(107, 58, 71, 0.35);
+  transform: translate(-50%, -55%);
   transition: opacity 0.25s, transform 0.25s;
-  animation: beat 1.6s ease-in-out infinite;
+  animation: beat 1.8s ease-in-out infinite;
+}
+.env-seal::before {                 /* embossed ring */
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+}
+.env-seal img {
+  width: 46%;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+  opacity: 0.92;
 }
 @keyframes beat {
-  0%, 100% { transform: translate(-50%, -60%) scale(1); }
-  50%      { transform: translate(-50%, -60%) scale(1.15); }
+  0%, 100% { transform: translate(-50%, -55%) scale(1); }
+  50%      { transform: translate(-50%, -55%) scale(1.12); }
 }
 
+/* A little peek when you hover before opening */
+.envelope:not(.open):hover .env-flap { transform: rotateX(16deg); }
+
 /* ---- Open state ---- */
-.envelope.open { cursor: default; }
-.envelope.open .env-flap { transform: rotateX(180deg); z-index: 1; }
-.envelope.open .env-card { transform: translateY(-62%); z-index: 2; }
-.envelope.open .env-seal { opacity: 0; animation: none; }
+.envelope.open { cursor: default; animation-play-state: paused; }
+.envelope.open .env-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+  background: var(--liner), linear-gradient(180deg, #e0617f, #ea7694);   /* we now see the inside of the flap */
+}
+.envelope.open .env-card { top: -68%; height: 130%; }
+.envelope.open .env-seal { opacity: 0; animation: none; transform: translate(-50%, -55%) scale(0.5); }
+
+/* ---- Sparkles and the burst of hearts ---- */
+.sparkle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 6;
+  font-style: normal;
+  font-size: var(--s);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.95), 0 0 16px var(--rose);
+  pointer-events: none;
+  animation: twinkle 2.6s ease-in-out var(--delay) infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0deg); }
+  50%      { opacity: 1;    transform: scale(1.1) rotate(25deg); }
+}
+
+.pop-heart {
+  position: absolute;
+  left: 50%; top: 30%;
+  width: var(--s); height: var(--s);
+  z-index: 7;
+  background: url("../assets/images/heart.svg") center / contain no-repeat;
+  pointer-events: none;
+  opacity: 0;
+  animation: pop-up 1.5s cubic-bezier(.15, .8, .3, 1) var(--delay) forwards;
+}
+@keyframes pop-up {
+  0%   { opacity: 0; transform: translate(-50%, 0) scale(0.3) rotate(0); }
+  15%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), var(--dy)) scale(1) rotate(var(--rot)); }
+}
 
 /* ---- Buttons under the envelope ---- */
 .actions { position: relative; height: 4rem; width: 100%; display: grid; place-items: center; }
-.actions .btn { grid-area: 1 / 1; transition: opacity 0.5s, visibility 0.5s, transform 0.15s, box-shadow 0.15s; }
+.actions .btn {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 11rem;
+  height: 3.3rem;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, #e8718d, var(--rose-deep));
+  transition: opacity 0.5s, visibility 0.5s, transform 0.15s, box-shadow 0.15s;
+}
+
+/* "Open it" gently pulses so it's obvious what to press */
+#openBtn:not(:hover) { animation: glow 2.2s ease-out infinite; }
+@keyframes glow {
+  0%, 100% { box-shadow: 0 6px 0 #b04561, 0 0 0 0 rgba(217, 95, 125, 0.45); }
+  60%      { box-shadow: 0 6px 0 #b04561, 0 0 0 14px rgba(217, 95, 125, 0); }
+}
 
 .btn-next { opacity: 0; visibility: hidden; }
-#openBtn.gone { opacity: 0; visibility: hidden; }
 .btn-next.show { opacity: 1; visibility: visible; }
+#openBtn.gone { opacity: 0; visibility: hidden; animation: none; }
 
-/* Leave room for the card that rises above the envelope */
-.envelope.open ~ .actions { margin-top: 1rem; }
-@media (max-width: 480px) { .hint { font-size: 1.8rem; } }
+@media (max-width: 480px) {
+  .stage { padding-top: 3.2rem; gap: 2.2rem; }
+}
